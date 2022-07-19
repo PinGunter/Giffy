@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import ListOfGifs from "../../components/ListOfGifs";
 import { useGifs } from "../../hooks/useGifs";
-import { useLocation } from "wouter";
 import TrendingSearches from "../../components/TrendingSearches";
 import Spinner from "../../components/Spinner";
 import SearchForm from "../../components/SearchForm";
@@ -9,21 +8,15 @@ import { Helmet } from "react-helmet";
 
 export default function Home() {
   const { loading, gifs } = useGifs();
-  const [location, setLocation] = useLocation();
-
-  const handleSubmit = useCallback(
-    ({ keyword }) => {
-      if (keyword) setLocation(`/search/${keyword}`);
-    },
-    [setLocation]
-  );
 
   return (
     <>
       <Helmet>
         <title>Home || Giffy</title>
       </Helmet>
-      <SearchForm onSubmit={handleSubmit} />
+      <header className="o-header">
+        <SearchForm />
+      </header>
       <div className="App-main">
         <div className="App-results">
           <>
